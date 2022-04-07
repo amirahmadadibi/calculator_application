@@ -13,6 +13,11 @@ class Application extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         TextButton(
+          style: TextButton.styleFrom(
+              shape: CircleBorder(
+                side: BorderSide(width: 0, color: Colors.transparent),
+              ),
+              backgroundColor: getBackgroundColor(text1)),
           onPressed: () {},
           child: Padding(
             padding: EdgeInsets.all(3),
@@ -24,6 +29,11 @@ class Application extends StatelessWidget {
           ),
         ),
         TextButton(
+          style: TextButton.styleFrom(
+              shape: CircleBorder(
+                side: BorderSide(width: 0, color: Colors.transparent),
+              ),
+              backgroundColor: getBackgroundColor(text2)),
           onPressed: () {},
           child: Padding(
             padding: EdgeInsets.all(3),
@@ -35,6 +45,11 @@ class Application extends StatelessWidget {
           ),
         ),
         TextButton(
+          style: TextButton.styleFrom(
+              shape: CircleBorder(
+                side: BorderSide(width: 0, color: Colors.transparent),
+              ),
+              backgroundColor: getBackgroundColor(text3)),
           onPressed: () {},
           child: Padding(
             padding: EdgeInsets.all(3),
@@ -46,6 +61,11 @@ class Application extends StatelessWidget {
           ),
         ),
         TextButton(
+          style: TextButton.styleFrom(
+              shape: CircleBorder(
+                side: BorderSide(width: 0, color: Colors.transparent),
+              ),
+              backgroundColor: getBackgroundColor(text4)),
           onPressed: () {},
           child: Padding(
             padding: EdgeInsets.all(3),
@@ -95,5 +115,25 @@ class Application extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isOperator(String text) {
+    var list = ['ac', 'ce', '%', '/', '*', '-', '+', '='];
+
+    for (var item in list) {
+      if (text == item) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  Color getBackgroundColor(String text) {
+    if (isOperator(text)) {
+      return backgroundGreyDark;
+    } else {
+      return backgroundGrey;
+    }
   }
 }
