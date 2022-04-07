@@ -2,11 +2,24 @@ import 'package:calculator_application/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(Application());
+  runApp(CalculatorApplication());
 }
 
-class Application extends StatelessWidget {
-  const Application({Key? key}) : super(key: key);
+class CalculatorApplication extends StatefulWidget {
+  const CalculatorApplication({Key? key}) : super(key: key);
+
+  @override
+  _CalculatorApplicationState createState() => _CalculatorApplicationState();
+}
+
+class _CalculatorApplicationState extends State<CalculatorApplication> {
+  var inputUser = '';
+
+  void buttonPressed(String text) {
+    setState(() {
+      inputUser = inputUser + text;
+    });
+  }
 
   Widget getRow(String text1, String text2, String text3, String text4) {
     return Row(
@@ -18,7 +31,9 @@ class Application extends StatelessWidget {
                 side: BorderSide(width: 0, color: Colors.transparent),
               ),
               backgroundColor: getBackgroundColor(text1)),
-          onPressed: () {},
+          onPressed: () {
+            buttonPressed(text1);
+          },
           child: Padding(
             padding: EdgeInsets.all(3),
             child: Text(
@@ -37,7 +52,9 @@ class Application extends StatelessWidget {
                 side: BorderSide(width: 0, color: Colors.transparent),
               ),
               backgroundColor: getBackgroundColor(text2)),
-          onPressed: () {},
+          onPressed: () {
+            buttonPressed(text2);
+          },
           child: Padding(
             padding: EdgeInsets.all(3),
             child: Text(
@@ -56,7 +73,9 @@ class Application extends StatelessWidget {
                 side: BorderSide(width: 0, color: Colors.transparent),
               ),
               backgroundColor: getBackgroundColor(text3)),
-          onPressed: () {},
+          onPressed: () {
+            buttonPressed(text3);
+          },
           child: Padding(
             padding: EdgeInsets.all(3),
             child: Text(
@@ -75,7 +94,9 @@ class Application extends StatelessWidget {
                 side: BorderSide(width: 0, color: Colors.transparent),
               ),
               backgroundColor: getBackgroundColor(text4)),
-          onPressed: () {},
+          onPressed: () {
+            buttonPressed(text4);
+          },
           child: Padding(
             padding: EdgeInsets.all(3),
             child: Text(
@@ -105,6 +126,22 @@ class Application extends StatelessWidget {
                 child: Container(
                   height: 100,
                   color: backgroundGreyDark,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          inputUser,
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              color: textGreen,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 28),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               Expanded(
