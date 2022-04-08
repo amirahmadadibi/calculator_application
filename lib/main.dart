@@ -1,5 +1,6 @@
 import 'package:calculator_application/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 void main() {
   runApp(CalculatorApplication());
@@ -14,6 +15,7 @@ class CalculatorApplication extends StatefulWidget {
 
 class _CalculatorApplicationState extends State<CalculatorApplication> {
   var inputUser = '';
+  var result = '';
 
   void buttonPressed(String text) {
     setState(() {
@@ -103,7 +105,18 @@ class _CalculatorApplicationState extends State<CalculatorApplication> {
               ),
               backgroundColor: getBackgroundColor(text4)),
           onPressed: () {
-            buttonPressed(text4);
+            if (text4 == '=') {
+              Parser parser = Parser();
+              Expression expression = parser.parse(inputUser);
+              ContextModel contextModel = ContextModel();
+              double eval =
+                  expression.evaluate(EvaluationType.REAL, contextModel);
+              setState(() {
+                result = eval.toString();
+              });
+            } else {
+              buttonPressed(text4);
+            }
           },
           child: Padding(
             padding: EdgeInsets.all(3),
@@ -146,6 +159,17 @@ class _CalculatorApplicationState extends State<CalculatorApplication> {
                               color: textGreen,
                               fontWeight: FontWeight.bold,
                               fontSize: 28),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          result,
+                          style: TextStyle(
+                            color: textGrey,
+                            fontSize: 62,
+                          ),
+                          textAlign: TextAlign.end,
                         ),
                       )
                     ],
