@@ -55,7 +55,9 @@ class _CalculatorApplicationState extends State<CalculatorApplication> {
           onPressed: () {
             if (text2 == 'ce') {
               setState(() {
-                inputUser = inputUser.substring(0, inputUser.length - 1);
+                if (inputUser.length > 0) {
+                  inputUser = inputUser.substring(0, inputUser.length - 1);
+                }
               });
             } else {
               buttonPressed(text2);
